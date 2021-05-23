@@ -3,7 +3,7 @@ import os
 
 import pytest
 
-from py_module_info.main import ModuleInfo
+from py_module_info import ModuleInfo
 
 
 @pytest.fixture()
