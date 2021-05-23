@@ -1,10 +1,16 @@
 # Py Module Info
 
 [![Testing](https://github.com/Adwaith-Rajesh/py-module-info/actions/workflows/tests.yml/badge.svg)](https://github.com/Adwaith-Rajesh/py-module-info/actions/workflows/tests.yml)
+[![Upload Python Package](https://github.com/Adwaith-Rajesh/py-module-info/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Adwaith-Rajesh/py-module-info/actions/workflows/python-publish.yml)
 
 Get extra info about a python module, like imports, functions called inside other funcs etc.
-
 ___
+
+## Installation
+```bash
+pip install py-module-info
+```
+
 ## What does it do?
 
 ### Get info about the imports used
