@@ -1,0 +1,24 @@
+appdirs==1.4.4
+autopep8==1.5.7
+cachetools==4.2.2
+certifi==2020.12.5
+chardet==4.0.0
+click==8.0.0
+code-starter==0.2.0
+colorama==0.4.4
+commonmark==0.9.1
+-e git+https://github.com/Adwaith-Rajesh/cospy.git@7d227942d0e7fcdca76706a94d6f98772e32d150#egg=cospy
+distlib==0.3.1
+filelock==3.0.12
+future==0.18.2
+idna==2.10
+pefile==2019.4.18
+py2exe==0.10.4.0
+pycodestyle==2.7.0
+Pygments==2.9.0
+requests==2.25.1
+rich==10.2.0
+six==1.16.0
+toml==0.10.2
+urllib3==1.26.4
+virtualenv==20.4.6
