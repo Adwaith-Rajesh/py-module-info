@@ -42,7 +42,7 @@ class Imports:
 
         return i_names
 
-    def get_import_strings(self, user_alias=False) -> List[str]:
+    def get_import_strings(self, use_alias=False) -> List[str]:
         """Convet import ast to import strings
         The ast of the import string:
             import one, two
@@ -55,7 +55,7 @@ class Imports:
         for i in self._imports:
             if isinstance(i, ast.Import):
                 for alias in i.names:
-                    if user_alias:
+                    if use_alias:
                         # the alias name of the import does not exists
                         if alias.name == self.__get_alias(alias):
                             import_strings.append(f"import {alias.name}")
@@ -66,7 +66,7 @@ class Imports:
                         import_strings.append(f"import {alias.name}")
             elif isinstance(i, ast.ImportFrom):
                 for alias in i.names:
-                    if user_alias:
+                    if use_alias:
                         # the alias name of the import does not exists
                         if alias.name == self.__get_alias(alias):
                             import_strings.append(
