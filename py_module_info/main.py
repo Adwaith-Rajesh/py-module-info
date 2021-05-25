@@ -108,15 +108,20 @@ class ModuleInfo:
         Example:
             def foo():
                 with open("test.json", "r") as f:
-                    load(f) 
+                    load(f)
             the function when called for get_func_call_in_func will return ast.Call object of open, load
         """
+
+        func_info = {}
+
         tree = find_function_def_in_class_def(self._tree)
         for child in ast.walk(tree):
             if isinstance(child, ast.FunctionDef):
                 if not hasattr(child, "parent"):
-                    return(get_func_meta_data(
-                        child,  read_file_code(self.filename), only_func_names))
+                    func_info[child.name] = get_func_meta_data(
+                        child,  read_file_code(self.filename), only_func_names)
+
+        return func_info
 
     def get_classes_info(self) -> Dict[str, List[ast.Call]]:
         pass
