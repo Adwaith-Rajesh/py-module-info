@@ -5,9 +5,9 @@ from typing import List
 from typing import Tuple
 from typing import Union
 
-from ._core import get_imports
-from ._core import get_func_meta_data
 from ._core import find_function_def_in_class_def
+from ._core import get_func_meta_data
+from ._core import get_imports
 
 __all__ = ("get_ast", "ModuleInfo")
 

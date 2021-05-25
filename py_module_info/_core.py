@@ -1,7 +1,6 @@
 import ast
-from ast import ClassDef
 import time
-
+from ast import ClassDef
 from typing import Any
 from typing import Dict
 from typing import List
