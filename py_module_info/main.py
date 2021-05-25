@@ -2,20 +2,23 @@ import ast
 from pathlib import Path
 from typing import Dict
 from typing import List
+from typing import Tuple
 from typing import Union
 
 from ._core import get_imports
+from ._core import get_func_meta_data
+from ._core import find_function_def_in_class_def
 
 __all__ = ("get_ast", "ModuleInfo")
 
 
-def __read(filename: str) -> str:
+def read_file_code(filename: str) -> str:
     with open(filename, "r") as f:
         return f.read()
 
 
 def get_ast(filename: str) -> ast.Module:
-    return ast.parse(__read(filename))
+    return ast.parse(read_file_code(filename))
 
 
 class Imports:
@@ -101,15 +104,20 @@ class ModuleInfo:
     def get_imports(self) -> Imports:
         return Imports(get_imports(self._tree))
 
-    def get_func_call_in_funcs(self) -> Dict[str, List[ast.Call]]:
+    def get_funcs_info(self, only_func_names: bool = False) -> Dict[str, List[ast.Call]]:
         """Return a list of all the func call that are executed inside the funcs
         Example:
             def foo():
                 with open("test.json", "r") as f:
                     load(f) 
-            the function when called for get_func_call_in_func will return ast.Call object of open, load]
+            the function when called for get_func_call_in_func will return ast.Call object of open, load
         """
-        pass
+        tree = find_function_def_in_class_def(self._tree)
+        for child in ast.walk(tree):
+            if isinstance(child, ast.FunctionDef):
+                if not hasattr(child, "parent"):
+                    print(get_func_meta_data(
+                        child,  read_file_code(self.filename), only_func_names))
 
-    def get_func_call_in_classes(self) -> Dict[str, List[ast.Call]]:
+    def get_classes_info(self) -> Dict[str, List[ast.Call]]:
         pass
