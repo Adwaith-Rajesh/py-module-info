@@ -2,7 +2,6 @@ import ast
 from pathlib import Path
 from typing import Dict
 from typing import List
-from typing import Tuple
 from typing import Union
 
 from ._core import find_function_def_in_class_def
@@ -116,7 +115,7 @@ class ModuleInfo:
         for child in ast.walk(tree):
             if isinstance(child, ast.FunctionDef):
                 if not hasattr(child, "parent"):
-                    print(get_func_meta_data(
+                    return(get_func_meta_data(
                         child,  read_file_code(self.filename), only_func_names))
 
     def get_classes_info(self) -> Dict[str, List[ast.Call]]:

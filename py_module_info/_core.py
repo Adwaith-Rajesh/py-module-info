@@ -1,6 +1,4 @@
 import ast
-import time
-from ast import ClassDef
 from typing import Any
 from typing import Dict
 from typing import List
@@ -35,7 +33,9 @@ def get_calls(func: ast.FunctionDef, code: str, end_calls_only: bool = False) ->
                 elif isinstance(child.func, ast.Attribute):
                     calls.append(child.func.attr)
 
-    return list(set(calls))  # easy way to remove duplicates
+    calls = list(set(calls))
+    calls.sort()
+    return calls  # easy way to remove duplicates
 
 
 def get_func_meta_data(func: ast.FunctionDef, code: str, only_func_names: bool = False) -> Dict[str, Union[int, List[str]]]:
