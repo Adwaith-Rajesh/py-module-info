@@ -5,6 +5,7 @@ from typing import List
 from typing import Union
 
 from ._core import find_function_def_in_class_def
+from ._core import get_class_meta_data
 from ._core import get_func_meta_data
 from ._core import get_imports
 
@@ -124,4 +125,11 @@ class ModuleInfo:
         return func_info
 
     def get_classes_info(self) -> Dict[str, List[ast.Call]]:
-        pass
+
+        class_info = {}
+
+        for child in ast.walk(self._tree):
+            if isinstance(child, ast.ClassDef):
+                class_info[child.name] = get_class_meta_data(
+                    child, read_file_code(self.filename))
+        return class_info

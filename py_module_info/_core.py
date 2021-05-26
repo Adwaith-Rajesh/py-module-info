@@ -52,6 +52,33 @@ def get_func_meta_data(func: ast.FunctionDef, code: str, only_func_names: bool =
     return meta_data
 
 
+def get_class_bases(_class: ast.ClassDef, code: str):
+    """Returns the names of all the inherited classes in a class"""
+    bases = []
+    for b in _class.bases:
+        bases.append(ast.get_source_segment(code, b))
+
+    bases = list(set(bases))
+    bases.sort()
+    return bases
+
+
+def get_class_meta_data(_class: ast.ClassDef, code: str):
+
+    meta_data = {}
+    if isinstance(_class, ast.ClassDef):
+        meta_data["bases"] = get_class_bases(_class, code)
+
+        methods = {}
+        for f in ast.walk(_class):
+            if isinstance(f, ast.FunctionDef):
+                methods[f.name] = get_func_meta_data(f, code)
+
+        meta_data["methods"] = methods
+
+    return meta_data
+
+
 def find_function_def_in_class_def(tree: ast.Module) -> ast.Module:
     """adds an attribute parent to the ast.FunctionDef in ClassDef
     so that it can be uniquely identified as methods in ClassDef
