@@ -119,3 +119,35 @@ print(m.get_funcs_info(only_func_name=True))
 {'foo': {'args': [], 'defaults': [], 'arg_count': 0, 'calls': ['load', 'open', 'pprint', 'print']}}
 
 ```
+
+### Get info about the classes in a module
+```python
+# test.py
+class Foo(A.Test):
+
+    def __init__(self, name):
+        self.name = name
+
+    def n():
+        pass
+
+
+class Bar():
+
+    def a():
+        print('Hello')
+
+```
+To get meta info about the classes in the module use
+```python
+from py_module_info import ModuleInfo
+
+m = ModuleInfo("test.py")
+print(m.get_classes_info())
+
+# output
+{'Foo': {'bases': ['A.Test'], 'methods': {'__init__': {'args': ['self', 'name'], 'defaults': [], 'arg_count': 2, 'calls': []}, 'n': {'args': [], 'defaults': [], 'arg_count': 0, 
+'calls': []}}}, 'Bar': {'bases': [], 'methods': {'a': {'args': [], 'defaults': [], 'arg_count': 0, 'calls': ["print('Hello')"]}}}}
+```
+
+Currently the output includes the information about the base classes and the info about different methods in the class.
