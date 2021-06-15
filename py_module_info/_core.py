@@ -52,7 +52,7 @@ def get_func_meta_data(func: ast.FunctionDef, code: str, only_func_names: bool =
     return meta_data
 
 
-def get_class_bases(_class: ast.ClassDef, code: str):
+def get_class_bases(_class: ast.ClassDef, code: str) -> List[str]:
     """Returns the names of all the inherited classes in a class"""
     bases = []
     for b in _class.bases:
@@ -63,7 +63,11 @@ def get_class_bases(_class: ast.ClassDef, code: str):
     return bases
 
 
-def get_class_meta_data(_class: ast.ClassDef, code: str):
+ClassInfoReturnType = Dict[str,
+                           Union[List[str], Dict[str, Union[int, List[str]]]]]
+
+
+def get_class_meta_data(_class: ast.ClassDef, code: str) -> ClassInfoReturnType:
 
     meta_data = {}
     if isinstance(_class, ast.ClassDef):

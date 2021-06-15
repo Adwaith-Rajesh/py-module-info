@@ -105,12 +105,7 @@ class ModuleInfo:
         return Imports(get_imports(self._tree))
 
     def get_funcs_info(self, only_func_names: bool = False) -> Dict[str, List[ast.Call]]:
-        """Return a list of all the func call that are executed inside the funcs
-        Example:
-            def foo():
-                with open("test.json", "r") as f:
-                    load(f)
-            the function when called for get_func_call_in_func will return ast.Call object of open, load
+        """R
         """
 
         func_info = {}
